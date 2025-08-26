@@ -1,15 +1,14 @@
 import streamlit as st
 from core import utils
 import pandas as pd
+from core.utils import custom_container, chips
 from core.charts import ECharts
-import base64
 
 
-
-
-
+# -----------------------------
+# Charts
+# -----------------------------
 def show_radar_skills():
-    # --- Define Skills & Levels ---
     skills = [
         {"name": "Python", "max": 100},
         {"name": "Data Analysis", "max": 100},
@@ -19,37 +18,22 @@ def show_radar_skills():
         {"name": "Cloud (AWS)", "max": 100},
         {"name": "Data Structures & Algorithms", "max": 100},
     ]
+    my_scores = [95, 90, 92, 75, 90, 70, 88]
 
-    # Your own scores (0–100 scale)
-    my_scores = [95, 90, 92, 85, 80, 75, 88]
-
-    # Optional: a "target" profile for comparison
-    target_scores = [100, 95, 95, 90, 90, 85, 90]
-
-    # --- Display Radar Chart ---
     ECharts.radar(
         indicators=skills,
-        data=[my_scores, target_scores],  # multiple series if you want comparison
-        series_names=["Jigar", "Target Profile"],
+        data=[my_scores],  # you're overriding series below
         height="400px",
+        tooltip={"confine": False},  # prevent clipping
         series=[{
             "type": "radar",
-            "data": [
-                {
-                    "value": my_scores,
-                    "name": "Jigar",
-                    "itemStyle": {"color": "red"},
-                    "areaStyle": {"color": "rgba(255,0,0,0.1)"},  # red, 30% opacity
-                    "lineStyle": {"color": "red", "width": 2}
-                },
-                {
-                    "value": target_scores,
-                    "name": "Target Profile",
-                    "itemStyle": {"color": "orange"},
-                    "areaStyle": {"color": "rgba(255,165,0,0.1)"},  # orange, 30% opacity
-                    "lineStyle": {"color": "orange", "width": 2}
-                }
-            ]
+            "data": [{
+                "value": my_scores,
+                "name": "Jigar",
+                "itemStyle": {"color": "red"},
+                "areaStyle": {"color": "rgba(255,0,0,0.12)"},
+                "lineStyle": {"color": "red", "width": 2}
+            }]
         }]
     )
 
@@ -59,75 +43,93 @@ def show_pie():
         "Skill": ["Python", "SQL", "Visualization", "Machine Learning", "Cloud (AWS)", "Finance"],
         "Level": [95, 85, 92, 80, 75, 88]
     })
-    autumn_colors = [
-        "#D2691E",  # Chocolate brown
-        "#FF8C00",  # Dark orange
-        "#FFA500",  # Orange
-        "#FFD700",  # Golden yellow
-        "#B22222",  # Firebrick red
-        "#8B4513"  # Saddle brown
-    ]
+    autumn_colors = ["#D2691E", "#FF8C00", "#FFA500", "#FFD700", "#B22222", "#8B4513"]
+
     ECharts.pie(
         df,
         names="Skill",
         values="Level",
-        # title="Skills Breakdown",   # ❌ remove this line to hide title
-        radius="70%",  # outer radius
-        inner_radius="40%",  # makes it a donut
-        border_radius=8,  # round edges
-        label_outside=True,  # labels with leader lines
-        legend_orient="vertical",
-        legend_left="right",
-        height="200px",
+        radius="70%",
+        inner_radius="40%",  # donut
+        border_radius=8,
+        label_outside=True,
+        height="240px",
         color=autumn_colors,
-        legend={"show": False},  # ❌ hide legend
+        legend={"show": False},
         label_font_size=10
     )
 
 
+# -----------------------------
+# Page
+# -----------------------------
 def render():
     # Title
     utils.custom_write("Jigar Patel's Portfolio", type='h1')
-    # Caption
     utils.custom_write('Everything there is to know about me.', type='para')
     st.divider()
 
-    # Description ------------------
-    image_column, description_column = st.columns([1, 2])
-    # My image
-    with image_column:
-        # Usage
+    # Header block (image + intro)
+    col_img, col_text = st.columns([1, 2])
+    with col_img:
         st.image("./core/references/images/ProfilePic no background.png", width=300)
         st.divider()
-    with description_column:
-        utils.custom_write("Who Am I?", type='h2', color='gray')
 
-        utils.custom_write("""
-        <span style="font-size:16px; line-height:1.8;">
-        👋 Hi, I’m <b style="color:#FF8C00;">Jigar Patel</b> — a <b>Data Analyst</b> and <b>Python Developer</b> based in Ireland, 
-        with a background in <b>Physics (B.Sc.)</b> and <b>Data Science & Analytics (M.Sc.)</b>.  
-        <br>
-        📊 I specialize in building <b>data-driven solutions</b> that bring clarity to complex problems.  
-        My work spans from developing <b>interactive dashboards</b> (Streamlit, Python, SQL, AWS)  
-        to applying <b>quantitative finance models</b> and advanced <b>statistical techniques</b> 
-        for real-world insights.  
-        <br>
-        🌌 Beyond work, I enjoy <b>astronomy</b>, <b>finance</b>, and <b>AI experimentation</b>,  
-        where I combine <b>technical rigor</b> with <b>creativity</b> to explore new ideas.  
-        <br>
-        </span>
-        """, type='caption')
+    with col_text:
+        with custom_container(key='Intro') as c:
+            utils.custom_write("Who Am I?", type='h2', color='black')
 
-        # --- Technical Skills
-        utils.custom_write('Technical Skills', type='h4', color='gray')
+            # ✨ Intro (closed span, better spacing)
+            utils.custom_write("""
+            <span style="font-size:16px; line-height:1.8;">
+            👋 Hi, I’m <b style="color:#FF8C00;">Jigar Patel</b> — a <b>Data Analyst</b> and <b>Python Developer</b> based in Ireland.
+            </span>
+            """, type='caption')
 
-        radar_col, pie_col = st.columns(2)
+            c.write('##### Education')
+            # If st.badge isn't available in your build, use chips instead:
+            chips(
+                [
+                    {"label": "M.Sc. Data Science & Analytics", "variant": "alt", "icon": "🎓"},
+                    {"label": "B.Sc. Physics", "variant": "info", "icon": "🔬"},
+                ],
+                size="sm",
+                container=c
+            )
+
+            utils.custom_write("What I do", type='h4', color='gray')
+            utils.custom_write("""
+            <span style="font-size:16px; line-height:1.8;">
+            📊 I specialize in building <b>data-driven solutions</b> that bring clarity to complex problems.
+            My work spans from developing <b>interactive dashboards</b> (Streamlit, Python, SQL, AWS)
+            to applying <b>quantitative finance models</b> and advanced <b>statistical techniques</b>
+            for real-world insights.<br>
+            🌌 Beyond work, I enjoy <b>astronomy</b>, <b>finance</b>, and <b>AI experimentation</b>, where I blend
+            <b>technical rigor</b> with <b>creativity</b>.
+            </span>
+            """, type='caption', align='left')
+
+    # Technical Skills block (charts side-by-side)
+    with custom_container(key='Charts') as c:
+        utils.custom_write('Technical Skills', type='h4', color='gray', align='center')
+        radar_col, pie_col = c.columns(2)
         with radar_col:
             show_radar_skills()
         with pie_col:
             show_pie()
 
-        with utils.custom_container(shadow=True):
-            st.subheader("Finance Portfolio Optimizer")
-            st.write("Analyzes S&P500 assets to build efficient frontiers using Python + Pandas.")
-            st.button("View Project")
+    # Projects teaser
+    utils.custom_write("📂 Projects", type='h2')
+    with custom_container(key='P1', bg="#FAF3E0", accent="#FF8C00", elevation=2, hover_elevation=4) as c:
+        c.subheader("Clinical Trials Dashboard")
+        c.caption("Built with **Streamlit + AWS**, providing real-time insights into clinical trial data.")
+        chips(["Streamlit", {"label": "AWS", "variant": "info", "icon": "☁️"}, "ECharts"], size="sm", container=c)
+        c.button("🔍 View Project")
+
+    with custom_container(key='P2', bg="#ffffff", elevation=2, hover_elevation=3, border="1px solid #eee") as c:
+        c.subheader("Finance Portfolio Optimizer")
+        c.caption("Efficient frontier & tangency tools in Python.")
+        chips(
+            ["Python", {"label": "Pandas", "variant": "line"}, {"label": "Portfolio", "variant": "warn", "icon": "💹"}],
+            size="sm", container=c)
+        c.button("📊 View Project")

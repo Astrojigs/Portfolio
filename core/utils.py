@@ -1,34 +1,221 @@
+# ./core/utils.py
+
 import base64
 from typing import Literal
-import streamlit as st
+# utils/containers.py
 from contextlib import contextmanager
+from uuid import uuid4
+import streamlit as st
+import re
+
+
+def _sanitize_key(key: str) -> str:
+    # valid CSS id chars only
+    key = re.sub(r'[^a-zA-Z0-9_\-:.]', '-', key)
+    return key or "card"
+
+
+def _shadow(level: int) -> str:
+    return {
+        0: "0 0 0 rgba(0,0,0,0)",
+        1: "0 4px 12px rgba(0,0,0,.12)",
+        2: "0 8px 24px rgba(0,0,0,.16)",
+        3: "0 14px 36px rgba(0,0,0,.20)",
+        4: "0 22px 48px rgba(0,0,0,.24)",
+    }.get(int(level or 0), "0 8px 24px rgba(0,0,0,.16)")
 
 
 @contextmanager
-def custom_container(bg_color="#ffffff", text_color="#333", shadow=True, padding="20px"):
+def custom_container(
+        *,
+        key: str,  # ← REQUIRED for stability (e.g., "proj1")
+        bg: str = "#ffffff",
+        text_color: str | None = None,
+        padding: str = "20px",
+        radius: str = "14px",
+        elevation: int = 2,  # 0–4
+        hover_elevation: int = 3,  # 0–4
+        hover_lift_px: int = 3,
+        margin: str = "16px 0 28px",
+        border: str | None = None,
+        accent: str | None = None,
+        accent_width: str = "4px",
+        force_visible_shadow: bool = True,
+        debug_outline: bool = False,
+):
     """
-    Custom Streamlit container with shadow and styling.
-    Usage:
-        with custom_container(shadow=True):
-            st.write("Inside container")
+    Stable, styled card container that wraps normal Streamlit widgets.
+    Use a unique `key` per card and reuse the same key on every run.
     """
-    shadow_css = "box-shadow: 0 4px 12px rgba(0,0,0,0.15);" if shadow else ""
-    style = f"""
-        background-color: {bg_color};
-        color: {text_color};
-        border-radius: 12px;
-        padding: {padding};
-        margin: 15px 0;
-        {shadow_css}
-    """
+    sid = _sanitize_key(key)  # stable id per card
+    marker_id = f"card-{sid}"
 
-    # Create the container
-    container = st.container()
+    block = st.container()
+    with block:
+        # 1) Insert the marker FIRST so CSS below will match immediately on this run
+        st.markdown(f"<span id='{marker_id}'></span>", unsafe_allow_html=True)
 
-    with container:
-        st.markdown(f"<div style='{style}'>", unsafe_allow_html=True)
-        yield  # let user place Streamlit widgets here
-        st.markdown("</div>", unsafe_allow_html=True)
+        # 2) Inject CSS that targets ONLY the nearest block containing this marker
+        nearest = (
+            f"[data-testid='stVerticalBlock']"
+            f":has(#{marker_id})"
+            f":not(:has([data-testid='stVerticalBlock'] #{marker_id}))"
+        )
+
+        st.markdown(f"""
+        <style>
+          #{marker_id} {{ display:none; }}
+
+          {nearest} {{
+            position: relative;
+            isolation: isolate;               /* keeps shadows independent */
+            z-index: 0;
+            background: {bg};
+            {f"color:{text_color};" if text_color else ""}
+            border-radius: {radius};
+            padding: {padding};
+            margin: {margin};
+            box-shadow: {_shadow(elevation)};
+            {"filter: drop-shadow(0 10px 22px rgba(0,0,0,.18));" if force_visible_shadow and elevation > 0 else ""}
+            {f"border:{border};" if border else ""}
+            {f"border-left:{accent_width} solid {accent};" if accent else ""}
+            transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+            overflow: visible;                 /* don't clip shadows */
+            background-clip: padding-box;
+            {"outline: 2px dashed #f90;" if debug_outline else ""}
+          }}
+
+          {nearest}:hover {{
+            transform: translateY(-{hover_lift_px}px);
+            box-shadow: {_shadow(hover_elevation)};
+            {"filter: drop-shadow(0 14px 32px rgba(0,0,0,.22));" if force_visible_shadow and hover_elevation > 0 else ""}
+          }}
+
+          /* remove extra inner padding some Streamlit wrappers add */
+          {nearest} > div {{ padding: 0 !important; }}
+        </style>
+        """, unsafe_allow_html=True)
+
+        yield block
+
+
+def _inject_chip_css_once():
+    if st.session_state.get("_chip_css_injected"):
+        return
+    st.session_state["_chip_css_injected"] = True
+    st.markdown("""
+    <style>
+      .chip-wrap{
+        display:flex; flex-wrap:wrap; gap:6px; row-gap:8px; align-items:center;
+        margin:.25rem 0 .35rem 0;
+      }
+      .chip{
+        display:inline-flex; align-items:center; gap:.4rem;
+        padding:.28rem .6rem;
+        border-radius:999px;
+        font-size:.85rem; line-height:1;
+        background:#f2f2f2; color:#333;
+        border:1px solid rgba(0,0,0,.08);
+        white-space:nowrap;
+      }
+      .chip.sm { font-size:.75rem; padding:.2rem .5rem; }
+      .chip.lg { font-size:.95rem; padding:.38rem .75rem; }
+
+      /* variants */
+      .chip.alt  { background:#fff4e5; color:#8a4b00; border-color:#ffd7a8; }
+      .chip.ok   { background:#e7f7ef; color:#116b3a; border-color:#bfe8d2; }
+      .chip.info { background:#eef6ff; color:#0b5cad; border-color:#cfe3ff; }
+      .chip.warn { background:#fff7e6; color:#a15a00; border-color:#ffe0b3; }
+      .chip.dark { background:#2f2f2f; color:#f2f2f2; border-color:#00000033; }
+      .chip.line { background:transparent; color:#555; border-color:#ccc; }
+
+      .chip .ico { font-style:normal; opacity:.9; }
+    </style>
+    """, unsafe_allow_html=True)
+
+
+def chips(
+        items,
+        *,
+        variant: str = "default",  # default variant for all
+        size: str = "md",  # "sm" | "md" | "lg"
+        container=None,  # pass your card/container object; default = st
+        wrap: bool = True,
+):
+    """
+    Render a row of 'chips' (pills). Items can be strings or dicts:
+      - "Python"
+      - {"label":"AWS", "variant":"alt", "icon":"☁️"}
+    """
+    _inject_chip_css_once()
+    target = container or st
+
+    def one(item):
+        if isinstance(item, str):
+            label, v, icon = item, variant, None
+        else:
+            label = item.get("label", "")
+            v = item.get("variant", variant)
+            icon = item.get("icon")
+        cls = "chip"
+        if size in ("sm", "lg"): cls += f" {size}"
+        if v and v != "default": cls += f" {v}"
+        ico = f"<span class='ico'>{icon}</span>" if icon else ""
+        return f"<span class='{cls}'>{ico}{label}</span>"
+
+    html = "".join(one(i) for i in items)
+    if wrap:
+        html = f"<div class='chip-wrap'>{html}</div>"
+
+    target.markdown(html, unsafe_allow_html=True)
+
+
+# @contextmanager
+# def custom_container(
+#         bg="#ffffff",
+#         padding="20px",
+#         radius="14px",
+#         shadow=True,
+#         hover=True,
+#         border=None,
+# ):
+#     uid = f"box-{uuid4().hex[:8]}"
+#
+#     # Style ONLY the nearest stVerticalBlock that contains the marker,
+#     # excluding ancestors that also contain it.
+#     nearest = f"[data-testid='stVerticalBlock']:has(#{uid}):not(:has([data-testid='stVerticalBlock'] #{uid}))"
+#
+#     st.markdown(f"""
+#     <style>
+#       /* hide marker */
+#       #{uid} {{ display: none; }}
+#
+#       /* nearest container only */
+#       {nearest} {{
+#           background: {bg};
+#           border-radius: {radius};
+#           padding: {padding};
+#           margin: 16px 0 28px;
+#           {"box-shadow: 0 6px 18px rgba(0,0,0,0.12);" if shadow else ""}
+#           {"border: 1px solid " + border + ";" if border else ""}
+#           transition: transform .18s ease, box-shadow .18s ease;
+#           overflow: hidden;
+#       }}
+#
+#       /* optional hover lift on that same nearest block */
+#       {nearest}:hover {{
+#           {"transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,.16);" if hover else ""}
+#       }}
+#
+#       /* avoid double inner padding from Streamlit wrappers */
+#       {nearest} > div {{ padding: 0 !important; }}
+#     </style>
+#     """, unsafe_allow_html=True)
+#
+#     block = st.container()
+#     with block:
+#         st.markdown(f"<span id='{uid}'></span>", unsafe_allow_html=True)
+#         yield block
 
 
 def custom_write(

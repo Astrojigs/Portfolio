@@ -364,6 +364,7 @@ class ECharts:
             legend_bottom: Optional[Union[str, int]] = None,
 
             # labeling
+            label_font_size: int = 10,
             label_inside: bool = False,
             label_inside_formatter: str = "{b}: {c} ({d}%)",
             label_outside: bool = False,
@@ -444,12 +445,21 @@ class ECharts:
 
         data = [{"name": str(n), "value": float(v)} for n, v in zip(df[names], df[values])]
 
-        # pick label position & formatter
         if label_inside:
-            lbl = {"show": True, "position": "inside", "formatter": label_inside_formatter}
+            lbl = {
+                "show": True,
+                "position": "inside",
+                "formatter": label_inside_formatter,
+                "fontSize": label_font_size
+            }
             line = {"show": False}
         elif label_outside:
-            lbl = {"show": True, "position": "outside", "formatter": label_outside_formatter}
+            lbl = {
+                "show": True,
+                "position": "outside",
+                "formatter": label_outside_formatter,
+                "fontSize": label_font_size
+            }
             line = {"show": True, "length": 15, "length2": 10}
         else:
             lbl = {"show": False}
@@ -491,7 +501,9 @@ class ECharts:
         # assemble option
         option = {
             **({"title": {"text": title, "left": "center"}} if title else {}),
-            "tooltip": {"trigger": "item", "formatter": "{b}: {c} ({d}%)"},
+            "tooltip": {"trigger": "item",
+                        "confine": True,
+                        "formatter": "{b}: {c} ({d}%)"},
             "legend": legend_cfg,
             "series": [series_item],
             **kwargs,
@@ -699,7 +711,9 @@ class ECharts:
 
         option = {
             **({"title": {"text": title, "left": "center"}} if title else {}),
-            "tooltip": {},
+            "tooltip": {
+                "confine": True
+            },
             "radar": {"indicator": list(indicators)},
             "series": [{
                 "type": "radar",

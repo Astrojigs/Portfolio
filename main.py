@@ -12,7 +12,7 @@ def config(page_title='Astrojigs Portfolio'):
                        page_icon='./core/references/images/ProfilePic.jpeg')
 
     with st.sidebar:
-        utils.custom_write("Portfolio Sections")
+        utils.custom_write("Profile Sections")
         section = sac.menu([
             sac.MenuItem(label='Home'),
             sac.MenuItem(label='About Me'),

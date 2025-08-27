@@ -30,6 +30,7 @@ def show_radar_skills():
         title="My Skill Radar",
         height="500px",
         series=[{
+            "tooltip": {"confine": True},
             "type": "radar",
             "data": [
                 {
@@ -79,10 +80,8 @@ def render():
     :return:
         None
     """
+    utils.hero_video(path="./core/references/gifs/DevTitle.webm")
 
-    # Title
-    utils.custom_write("Jigar Patel's Developer Portfolio", type='h2')
-    # Caption
     utils.custom_write('Everything there is to know about me.', type='caption')
 
     show_radar_skills()

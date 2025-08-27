@@ -1,6 +1,7 @@
 # ./core/utils.py
 
 import base64
+from pathlib import Path
 from typing import Literal
 # utils/containers.py
 from contextlib import contextmanager
@@ -308,3 +309,27 @@ def set_background(png_file):
     </style>
     '''
     st.markdown(page_bg_img, unsafe_allow_html=True)
+
+
+def display_gif(local_path: str):
+    file_ = open(local_path, "rb")
+    contents = file_.read()
+    data_url = base64.b64encode(contents).decode("utf-8")
+    file_.close()
+
+    st.markdown(
+        f'<img src="data:image/gif;base64,{data_url}" alt="cat gif">',
+        unsafe_allow_html=True,
+    )
+
+
+def hero_video(path: str, width: int = 900, center: bool = True):
+    data = Path(path).read_bytes()
+    b64 = base64.b64encode(data).decode("utf-8")
+    style = f"width:{width}px; height:auto; {'display:block; margin:0 auto;' if center else ''}"
+    st.markdown(f"""
+    <video src="data:video/webm;base64,{b64}"
+           autoplay loop muted playsinline
+           style="{style}">
+    </video>
+    """, unsafe_allow_html=True)

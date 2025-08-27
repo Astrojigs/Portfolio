@@ -26,10 +26,11 @@ def show_radar_skills():
         height="400px",
         tooltip={"confine": False},  # prevent clipping
         series=[{
+            "tooltip":{"confine": True},
             "type": "radar",
             "data": [{
                 "value": my_scores,
-                "name": "Jigar",
+                "name": "My Confidence Score",
                 "itemStyle": {"color": "red"},
                 "areaStyle": {"color": "rgba(255,0,0,0.12)"},
                 "lineStyle": {"color": "red", "width": 2}

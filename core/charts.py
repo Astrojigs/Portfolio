@@ -714,7 +714,22 @@ class ECharts:
             "tooltip": {
                 "confine": True
             },
-            "radar": {"indicator": list(indicators)},
+            "radar": {
+                "radius":120,
+                "shape": 'circle',
+                "indicator": list(indicators),
+                "axisName": {
+                    "color": '#fc6203',
+                    # "backgroundColor": '#666',
+                    "borderRadius": 7,
+                    "padding": [5, 5],
+                    "fontSize":14
+                },
+                "axisLabel": {
+                    "fontSize": 1
+                }
+
+            },
             "series": [{
                 "type": "radar",
                 "data": series_data,

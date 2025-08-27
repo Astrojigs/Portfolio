@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 from core import utils
 from core.charts import ECharts
-
+from sections import about_me
 
 def show_radar_skills():
     # --- Define Skills & Levels ---
@@ -82,7 +82,10 @@ def render():
     """
     utils.hero_video(path="./core/references/gifs/DevTitle.webm")
 
-    utils.custom_write('Everything there is to know about me.', type='caption')
-
-    show_radar_skills()
-    show_pie()
+    utils.custom_write("Python Developer / Data Analyst", type='h1')
+    utils.custom_write(
+        text="""
+        I work building techniques for data processing and visualization in addition to building 
+        automation pipelines
+        """, type='h4', color='gray')
+    about_me.render()

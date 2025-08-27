@@ -100,55 +100,27 @@ def custom_container(
         yield block
 
 
-def _inject_chip_css_once():
-    if st.session_state.get("_chip_css_injected"):
-        return
-    st.session_state["_chip_css_injected"] = True
+def inject_chip_css():
     st.markdown("""
     <style>
-      .chip-wrap{
-        display:flex; flex-wrap:wrap; gap:6px; row-gap:8px; align-items:center;
-        margin:.25rem 0 .35rem 0;
-      }
-      .chip{
-        display:inline-flex; align-items:center; gap:.4rem;
-        padding:.28rem .6rem;
-        border-radius:999px;
-        font-size:.85rem; line-height:1;
-        background:#f2f2f2; color:#333;
-        border:1px solid rgba(0,0,0,.08);
-        white-space:nowrap;
-      }
-      .chip.sm { font-size:.75rem; padding:.2rem .5rem; }
-      .chip.lg { font-size:.95rem; padding:.38rem .75rem; }
-
-      /* variants */
-      .chip.alt  { background:#fff4e5; color:#8a4b00; border-color:#ffd7a8; }
-      .chip.ok   { background:#e7f7ef; color:#116b3a; border-color:#bfe8d2; }
-      .chip.info { background:#eef6ff; color:#0b5cad; border-color:#cfe3ff; }
-      .chip.warn { background:#fff7e6; color:#a15a00; border-color:#ffe0b3; }
-      .chip.dark { background:#2f2f2f; color:#f2f2f2; border-color:#00000033; }
-      .chip.line { background:transparent; color:#555; border-color:#ccc; }
-
-      .chip .ico { font-style:normal; opacity:.9; }
+      .chip-wrap{display:flex;flex-wrap:wrap;gap:6px;row-gap:8px;align-items:center;margin:.25rem 0 .35rem 0;}
+      .chip{display:inline-flex;align-items:center;gap:.4rem;padding:.28rem .6rem;border-radius:999px;
+            font-size:.85rem;line-height:1;background:#f2f2f2;color:#333;border:1px solid rgba(0,0,0,.08);white-space:nowrap;}
+      .chip.sm{font-size:.75rem;padding:.2rem .5rem;}
+      .chip.lg{font-size:.95rem;padding:.38rem .75rem;}
+      .chip.alt{background:#fff4e5;color:#8a4b00;border-color:#ffd7a8;}
+      .chip.ok{background:#e7f7ef;color:#116b3a;border-color:#bfe8d2;}
+      .chip.info{background:#eef6ff;color:#0b5cad;border-color:#cfe3ff;}
+      .chip.warn{background:#fff7e6;color:#a15a00;border-color:#ffe0b3;}
+      .chip.dark{background:#2f2f2f;color:#f2f2f2;border-color:#00000033;}
+      .chip.line{background:transparent;color:#555;border-color:#ccc;}
+      .chip .ico{font-style:normal;opacity:.9;}
     </style>
     """, unsafe_allow_html=True)
 
 
-def chips(
-        items,
-        *,
-        variant: str = "default",  # default variant for all
-        size: str = "md",  # "sm" | "md" | "lg"
-        container=None,  # pass your card/container object; default = st
-        wrap: bool = True,
-):
-    """
-    Render a row of 'chips' (pills). Items can be strings or dicts:
-      - "Python"
-      - {"label":"AWS", "variant":"alt", "icon":"☁️"}
-    """
-    _inject_chip_css_once()
+def chips(items, *, variant="default", size="md", container=None, wrap=True):
+    inject_chip_css()  # ← inject EVERY run
     target = container or st
 
     def one(item):
@@ -167,7 +139,6 @@ def chips(
     html = "".join(one(i) for i in items)
     if wrap:
         html = f"<div class='chip-wrap'>{html}</div>"
-
     target.markdown(html, unsafe_allow_html=True)
 
 
@@ -333,3 +304,4 @@ def hero_video(path: str, width: int = 900, center: bool = True):
            style="{style}">
     </video>
     """, unsafe_allow_html=True)
+

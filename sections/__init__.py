@@ -1,7 +1,7 @@
 from . import home
 from . import about_me
 from . import contact
-from . import project_hub
+from . import my_cv
 from . import projects
 
 __all__ = [
@@ -9,5 +9,5 @@ __all__ = [
     "about_me",
     "contact",
     "projects",
-    "project_hub"
+    "my_cv"
 ]

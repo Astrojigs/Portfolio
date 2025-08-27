@@ -1,7 +1,9 @@
 from . import barnes_hut
 from . import dsna
+from . import cycle_gan
 
 __all__ = [
     "barnes_hut",
-    'dsna'
+    'dsna',
+    "cycle_gan"
 ]

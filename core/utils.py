@@ -3,9 +3,7 @@
 import base64
 from pathlib import Path
 from typing import Literal
-# utils/containers.py
 from contextlib import contextmanager
-from uuid import uuid4
 import streamlit as st
 import re
 
@@ -295,12 +293,12 @@ def display_gif(local_path: str):
 
 
 def hero_video(
-    path: str,
-    *,
-    max_width_px: int = 900,     # target max width on desktop
-    center: bool = True,
-    mp4_path: str | None = None, # optional iOS/Safari fallback
-    poster: str | None = None    # optional poster image path
+        path: str,
+        *,
+        max_width_px: int = 900,  # target max width on desktop
+        center: bool = True,
+        mp4_path: str | None = None,  # optional iOS/Safari fallback
+        poster: str | None = None  # optional poster image path
 ):
     # Base64 for WEBM
     webm_b64 = base64.b64encode(Path(path).read_bytes()).decode("utf-8")
@@ -337,3 +335,16 @@ def hero_video(
         unsafe_allow_html=True
     )
 
+
+
+def center_gif(path: str, max_width_px: int = 480, alt: str = ""):
+    b64 = base64.b64encode(Path(path).read_bytes()).decode()
+    st.markdown(
+        f"""
+        <img src="data:image/gif;base64,{b64}"
+             alt="{alt}"
+             style="display:block;margin:0 auto;max-width:100%;
+                    width:min(100%, {max_width_px}px);height:auto;" />
+        """,
+        unsafe_allow_html=True
+    )

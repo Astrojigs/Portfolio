@@ -22,7 +22,7 @@ def main():
     barnes_hut_page = st.Page(sections.projects.barnes_hut.render, title='Barnes-Hut',
                               icon=":material/developer_board:",
                               url_path="projects-barnes_hut")
-    cycle_gan_page = st.Page(sections.projects.cycle_gan.render, title='CycleGAN', url_path="projects-cyclegan",
+    cycle_gan_page = st.Page(sections.projects.cycle_gan.render, title='Aerial Images to Maps (CycleGAN)', url_path="projects-cyclegan",
                              icon=":material/landscape_2:")
 
     # Other pages
@@ -32,7 +32,7 @@ def main():
     pages = {
         "Profile": [home_page],
         "Projects": [barnes_hut_page, cycle_gan_page],
-        "Other": [contact_page, cv_page]
+        "Get in Touch": [contact_page, cv_page]
     }
 
     st.session_state["pages"] = {
@@ -43,7 +43,7 @@ def main():
         "my_cv": cv_page
     }
 
-    pg = st.navigation(pages, position="sidebar", expanded=True)
+    pg = st.navigation(pages, position="top", expanded=True)
     pg.run()  # <- do not manually call your render() functions elsewhere
 
 

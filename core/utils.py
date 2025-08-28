@@ -294,14 +294,46 @@ def display_gif(local_path: str):
     )
 
 
-def hero_video(path: str, width: int = 900, center: bool = True):
-    data = Path(path).read_bytes()
-    b64 = base64.b64encode(data).decode("utf-8")
-    style = f"width:{width}px; height:auto; {'display:block; margin:0 auto;' if center else ''}"
-    st.markdown(f"""
-    <video src="data:video/webm;base64,{b64}"
-           autoplay loop muted playsinline
-           style="{style}">
-    </video>
-    """, unsafe_allow_html=True)
+def hero_video(
+    path: str,
+    *,
+    max_width_px: int = 900,     # target max width on desktop
+    center: bool = True,
+    mp4_path: str | None = None, # optional iOS/Safari fallback
+    poster: str | None = None    # optional poster image path
+):
+    # Base64 for WEBM
+    webm_b64 = base64.b64encode(Path(path).read_bytes()).decode("utf-8")
+    webm_src = f"data:video/webm;base64,{webm_b64}"
+
+    # Optional MP4 fallback (helps on iOS Safari)
+    mp4_tag = ""
+    if mp4_path:
+        mp4_b64 = base64.b64encode(Path(mp4_path).read_bytes()).decode("utf-8")
+        mp4_src = f"data:video/mp4;base64,{mp4_b64}"
+        mp4_tag = f'<source src="{mp4_src}" type="video/mp4"/>'
+
+    margin = "display:block; margin:0 auto;" if center else ""
+    poster_attr = f'poster="{poster}"' if poster else ""
+
+    # Key: width scales down on mobile, never exceeds max_width_px on desktop
+    # No cropping: height:auto; object-fit:contain;
+    style = (
+        f"max-width:100%; width:min(100%, {max_width_px}px); "
+        f"height:auto; object-fit:contain; {margin}"
+    )
+
+    st.markdown(
+        f"""
+        <video {poster_attr}
+               autoplay loop muted playsinline preload="metadata"
+               style="{style}">
+            <source src="{webm_src}" type="video/webm"/>
+            {mp4_tag}
+            <!-- Fallback text -->
+            Your browser does not support the video tag.
+        </video>
+        """,
+        unsafe_allow_html=True
+    )
 

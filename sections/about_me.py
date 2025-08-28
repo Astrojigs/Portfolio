@@ -57,14 +57,14 @@ def render():
 
     with col_text:
         with custom_container(key='Intro') as c:
-            utils.custom_write("Who Am I?", type='h2', color='black')
+            # utils.custom_write("Who Am I?", type='h2', color='black')
 
             # ✨ Intro (closed span, better spacing)
             utils.custom_write("""
             <span style="font-size:16px; line-height:1.8;">
-            My name is Optimus Prime, we are autonomous robo....nah just kidding. I'm <b style="color:#FF8C00;">Jigar Patel</b> — a <b>Data Analyst</b> and <b>Python Developer</b> based in Ireland.
+            I'm <b style="color:#FF8C00;">Jigar Patel</b> — a <b>Data Analyst</b> and <b>Python Developer</b> based in Ireland.
             </span>
-            """, type='caption')
+            """, type='para')
 
             custom_write('Education', color='gray', type='h4')
             # If st.badge isn't available in your build, use chips instead:

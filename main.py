@@ -18,6 +18,10 @@ def main():
     # ------------------- Pages ---------------------------
     home_page = st.Page(sections.home.render, title='Home', icon=':material/home:', url_path="home", default=True)
 
+    # Gallery
+    gallery_page = st.Page(sections.gallery.render, title='Gallery', url_path='gallery',
+                           icon=':material/gallery_thumbnail:')
+
     # ---------- Project Pages --------------------
     barnes_hut_page = st.Page(sections.projects.barnes_hut.render, title='Barnes-Hut',
                               icon=":material/developer_board:",
@@ -30,13 +34,14 @@ def main():
     cv_page = st.Page(sections.my_cv.render, title='My Resume', url_path='my_cv', icon=':material/article:')
 
     pages = {
-        "Profile": [home_page],
+        "Profile": [home_page, gallery_page],
         "Projects": [barnes_hut_page, cycle_gan_page],
         "Get in Touch": [contact_page, cv_page]
     }
 
     st.session_state["pages"] = {
         "home": home_page,
+        "gallery":gallery_page,
         "projects-barnes_hut": barnes_hut_page,
         "projects-cyclegan": cycle_gan_page,
         "contact": contact_page,

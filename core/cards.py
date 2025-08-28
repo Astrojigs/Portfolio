@@ -1,7 +1,7 @@
 # core/components.py
 from typing import List
 import streamlit as st
-from core.utils import custom_container, chips
+from core.utils import custom_container, chips, custom_write
 
 
 def project_card(title: str, caption: str, tags: List[str], url: str, url_name: str, summary: str, image_url: str,
@@ -16,7 +16,7 @@ def project_card(title: str, caption: str, tags: List[str], url: str, url_name: 
             # sub title(caption)
             st.caption(caption)
 
-            tags_col, link_col = st.columns([2, 1], vertical_alignment='center')
+            tags_col, link_col = st.columns([3, 1], vertical_alignment='center')
             # tags
             with tags_col:
                 chips(tags, variant="alt", size="md")
@@ -36,6 +36,7 @@ def project_card(title: str, caption: str, tags: List[str], url: str, url_name: 
                     st.warning("`url` given does not point to a project.")
 
             # Summary
+            custom_write("Summary", type='h5', color='gray')
             st.write(summary)
 
         with right:

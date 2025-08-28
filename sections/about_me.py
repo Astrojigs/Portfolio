@@ -164,6 +164,24 @@ def render():
                   "main/Outputs/GIF/Barnes_hut_dual_gif.gif",
         image_caption="Dual view: quadtree + particle motion"
     )
+
+    # Aerial Images → Maps (CycleGAN)
+    project_card(
+        title="Aerial Images → Maps (CycleGAN)",
+        caption="Image-to-image translation • Satellite imagery • CycleGAN",
+        tags=["Python", "PyTorch", "CycleGAN", "Image2Image", "Computer Vision", "Satellite"],
+        url="https://github.com/Astrojigs/Aerial-images-to-maps",
+        url_name="🌐 GitHub ↗",
+        summary=(
+            "Translates aerial photos into map-style renderings with a cyclic GAN. "
+            "Includes generator/discriminator architectures, training at 128×128 & 256×256, "
+            "and losses (generator, discriminator, cycle, identity). Comes with an evaluation "
+            "notebook and example results."
+        ),
+        image_url="https://github.com/Astrojigs/Aerial-images-to-maps/blob/main/Images/example%20images/128GAN_bs1_epoch50_results.png?raw=true",
+        image_caption="Example output: aerial → map (CycleGAN)"
+    )
+
     # with custom_container(key='P1', bg="#FAF3E0", accent="#FF8C00", elevation=2, hover_elevation=4) as c:
     #     c.subheader("Clinical Trials Dashboard")
     #     c.caption("Built with **Streamlit + AWS**, providing real-time insights into clinical trial data.")

@@ -22,16 +22,17 @@ def main():
     barnes_hut_page = st.Page(sections.projects.barnes_hut.render, title='Barnes-Hut',
                               icon=":material/developer_board:",
                               url_path="projects-barnes_hut")
-    cycle_gan_page = st.Page(sections.projects.cycle_gan.render, title='CycleGAN', url_path="projects-cyclegan")
+    cycle_gan_page = st.Page(sections.projects.cycle_gan.render, title='CycleGAN', url_path="projects-cyclegan",
+                             icon=":material/landscape_2:")
 
     # Other pages
     contact_page = st.Page(sections.contact.render, title='Contact', url_path='contact', icon=":material/mail:")
-    cv_page = st.Page(sections.my_cv.render, title='My Resume/CV', url_path='my_cv')
+    cv_page = st.Page(sections.my_cv.render, title='My Resume', url_path='my_cv', icon=':material/article:')
 
     pages = {
         "Profile": [home_page],
         "Projects": [barnes_hut_page, cycle_gan_page],
-        "Other": [contact_page]
+        "Other": [contact_page, cv_page]
     }
 
     st.session_state["pages"] = {

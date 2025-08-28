@@ -3,7 +3,7 @@ from core import utils
 import pandas as pd
 
 from core.cards import project_card
-from core.utils import custom_container, chips
+from core.utils import custom_container, chips, custom_write
 from core.charts import ECharts
 
 
@@ -41,29 +41,6 @@ def show_radar_skills():
 
     )
 
-
-def show_pie():
-    df = pd.DataFrame({
-        "Skill": ["Python", "SQL", "Visualization", "Machine Learning", "Cloud (AWS)", "Finance"],
-        "Level": [95, 85, 92, 80, 75, 88]
-    })
-    autumn_colors = ["#D2691E", "#FF8C00", "#FFA500", "#FFD700", "#B22222", "#8B4513"]
-
-    ECharts.pie(
-        df,
-        names="Skill",
-        values="Level",
-        radius="70%",
-        inner_radius="40%",  # donut
-        border_radius=8,
-        label_outside=True,
-        height="240px",
-        color=autumn_colors,
-        legend={"show": False},
-        label_font_size=10
-    )
-
-
 # -----------------------------
 # Page
 # -----------------------------
@@ -89,16 +66,10 @@ def render():
             </span>
             """, type='caption')
 
-            c.write('##### Education')
+            custom_write('Education', color='gray', type='h4')
             # If st.badge isn't available in your build, use chips instead:
-            chips(
-                [
-                    {"label": "M.Sc. Data Science & Analytics", "variant": "alt", "icon": "🎓"},
-                    {"label": "B.Sc. Physics", "variant": "info", "icon": "🔬"},
-                ],
-                size="lg",
-                container=c
-            )
+            st.badge(label='**M.Sc. Data Science & Analytics** :material/code:', color='red')
+            st.badge(label="**B.Sc.  Physics** :material/orbit:", color='orange')
 
             utils.custom_write("Things I do", type='h4', color='gray')
             utils.custom_write("""

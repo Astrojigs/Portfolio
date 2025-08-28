@@ -85,7 +85,7 @@ def render():
     utils.custom_write("Python Developer / Data Analyst", type='h1')
     utils.custom_write(
         text="""
-        I work building techniques for data processing and visualization in addition to building 
-        automation pipelines
+        I work on building techniques for data processing and data visualization in addition to building 
+        automation pipelines.
         """, type='h4', color='gray')
     about_me.render()

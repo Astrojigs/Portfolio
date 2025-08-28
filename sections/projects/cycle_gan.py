@@ -149,7 +149,7 @@ def _examples():
 
 
 def render():
-    st.write('Hello')
+    st.write('# :rainbow[Hello]')
     _hero()
     _architecture()
     _math()

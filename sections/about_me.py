@@ -182,6 +182,39 @@ def render():
         image_caption="Example output: aerial → map (CycleGAN)"
     )
 
+    # Chaos, Pattern & Physics (3-body gravity → fractal basins)
+    project_card(
+        title="Chaos, Pattern & Physics (3-body gravity)",
+        caption="Chaotic trajectories • Fractal basins • N-body toy model",
+        tags=["Python", "Jupyter", "Simulation", "Physics", "Chaos Theory"],
+        url="https://github.com/Astrojigs/Chaos-Pattern-and-Physics",
+        url_name="🌐 GitHub ↗",
+        summary=(
+            "A playful physics simulation: one particle moves under gravity from three fixed “stars.” "
+            "You colour each initial position by the star it eventually collides with, revealing beautiful "
+            "fractal basins (100×100 → 2000×2000 grids) and sample trajectories."
+        ),
+        image_url="https://raw.githubusercontent.com/Astrojigs/Chaos-Pattern-and-Physics/main/NicePattern.png",
+        image_caption="Fractal-like basin of attraction from the 3-body setup"
+    )
+
+    # Delhi Air Pollution — QGIS + SQL/PostGIS
+    project_card(
+        title="Delhi Air Pollution — QGIS + SQL/PostGIS",
+        caption="Geospatial analysis • Wind & stubble burning • Temporal slices",
+        tags=["QGIS", "PostgreSQL", "PostGIS", "GIS", "EDA"],
+        url="https://github.com/Astrojigs/Delhi-air-pollution-reasons",
+        url_name="🌐 GitHub ↗",
+        summary=(
+            "Spatial investigation of Delhi’s pollution: NASA fire points, wind vectors, terrain, and air-quality "
+            "stations combined in QGIS/PostGIS. Builds 500 km views around Delhi and uses temporal slices "
+            "(Aug–Nov) to show how post-harvest stubble fires and prevailing winds align with smog spikes."
+        ),
+        image_url="https://github.com/Astrojigs/Delhi-air-pollution-reasons/raw/main/Photos/terrain%20with%20wind%20data%20in%20Novemeber.png",
+        image_caption="Wind vectors over terrain with incident fires (Nov)"
+    )
+
+
     # with custom_container(key='P1', bg="#FAF3E0", accent="#FF8C00", elevation=2, hover_elevation=4) as c:
     #     c.subheader("Clinical Trials Dashboard")
     #     c.caption("Built with **Streamlit + AWS**, providing real-time insights into clinical trial data.")

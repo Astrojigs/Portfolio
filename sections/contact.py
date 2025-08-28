@@ -38,18 +38,7 @@ GITHUB = "https://github.com/Astrojigs"
 
 
 def render():
-    custom_write("Get in touch", type="h1", align="center", color='gray')
-    url = ("https://media3.giphy.com/media/"
-           "v1.Y2lkPTc5MGI3NjExdGg1MGEybnljbG9scTU0N2JuMDNiZXl2cWY0NXRueDZwNGc0bXlndyZl"
-           "cD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7NODV5mWDwnAvRQbDJ/giphy.gif")
-    st.markdown(
-        f"""
-        <img src="{url}" alt="Astrojigs intro"
-             style="display:block;margin:0 auto;max-width:100%;
-                    width:min(100%,180px);height:auto;" />
-        """,
-        unsafe_allow_html=True
-    )
+    custom_write("Get In Touch", type="h1", align="center", color='gray')
     custom_write(
         "I work at the intersection of data, Python, and clear storytelling.<br> "
         "Whether you’re hiring, exploring a collaboration, or want feedback on an idea, "
@@ -173,5 +162,6 @@ def render():
                                "On Windows: Settings → Apps → Default apps → Email.")
 
     # Optional: small note on response time / availability
-    custom_write("I usually reply within 24–48 hours. If it’s urgent, please mention it in the subject line.",
+    custom_write("I usually reply within 24–48 hours. If it’s urgent, please mention it in the subject line."
+                 "<br><br><br>",
                  type='caption')

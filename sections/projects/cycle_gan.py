@@ -149,6 +149,7 @@ def _examples():
 
 
 def render():
+    st.write('Hello')
     _hero()
     _architecture()
     _math()

@@ -80,7 +80,10 @@ def render():
     :return:
         None
     """
-    utils.hero_video(path="./core/references/gifs/DevTitle.webm")
+    utils.hero_video(path="./core/references/gifs/DevTitle.webm",
+                     mp4_path="./core/references/gifs/DevTitle.mp4",  # optional but recommended
+                     max_width_px=960
+                     )
 
     utils.custom_write("Python Developer / Data Analyst", type='h1')
     utils.custom_write(

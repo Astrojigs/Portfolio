@@ -13,7 +13,7 @@ def render():
 
     with c1:
         # GIS example
-        with custom_container(key='GIS example', hover_lift_px=3, radius="100px", padding="0px"):
+        with custom_container(key='GIS example', hover_lift_px=3, radius="60px", padding="20px"):
             dublin_proximity_gis.render()
 
     with c2:

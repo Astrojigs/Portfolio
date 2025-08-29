@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="faa3fb0a-aef0-4805-b991-ae11607dfae5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/sections/gallery.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/examples/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/examples/complex_radar_chart.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/examples/dublin_proximity_gis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sections/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sections/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/charts.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/charts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/gallery.py" beforeDir="false" afterPath="$PROJECT_DIR$/sections/gallery.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

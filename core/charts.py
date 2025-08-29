@@ -165,7 +165,7 @@ class GIS:
         # map title opts ------Main Title Options
         title_opts = {
             'text': map_title,
-            'subtext': 'Clinical Data Department \n The Mater Misericordiae University Hospital',
+            'subtext': 'created by @Astrojigs (Jigar Patel)',
             'left': 'right'
         }
 
@@ -186,16 +186,7 @@ class GIS:
 
         # --------------toolbox
         toolbox_opts = {
-            'show': True,
-            # // orient: 'vertical',
-            'left': 'left',
-            'top': 'top',
-            'feature': {
-                'dataView': {'readOnly': True},
-                'restore': {},
-                'saveAsImage': {'name': map_title,
-                                'type': 'png'}
-            }
+            'show': False,
         }
 
         ## ------------------------ Type of Plots --------------------
@@ -208,6 +199,7 @@ class GIS:
             opts = {
                 'title': title_opts,
                 "tooltip": tooltip_opts,
+                "visualMap": {'text': ['Low', "High"]},
                 "geo": {
                     "map": self.layers[0]["map_name"],
                     "roam": True,
@@ -714,8 +706,9 @@ class ECharts:
             "tooltip": {
                 "confine": True
             },
+            "toolbox": {'show': False},
             "radar": {
-                "radius":120,
+                "radius": 120,
                 "shape": 'circle',
                 "indicator": list(indicators),
                 "axisName": {
@@ -723,7 +716,7 @@ class ECharts:
                     # "backgroundColor": '#666',
                     "borderRadius": 7,
                     "padding": [5, 5],
-                    "fontSize":14
+                    "fontSize": 14
                 },
                 "axisLabel": {
                     "fontSize": 1

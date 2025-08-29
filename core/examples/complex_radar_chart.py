@@ -64,4 +64,3 @@ def render():
         tooltip={"confine": True, "trigger": "item"},
         # toolbox={"feature": {"saveAsImage": {"title": "Save"}, "restore": {}}, "right": 6, "top": "middle"},
     )
-    st.caption("Legend centered above; indicator labels reduced to 10pt. Tweak legend.top / radar.center if needed.")

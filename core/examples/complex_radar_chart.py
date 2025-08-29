@@ -22,7 +22,7 @@ def render():
         [58, 62, 75, 68, 76, 72, 60, 75],
         [60, 58, 78, 62, 72, 65, 55, 73],
     ]
-    palette = ["#2563eb", "#22c55e", "#eab308", "#ef4444"]
+    palette = ["#540d6e", "#ee4266", "#ffd23f", "#3bceac"]
 
     custom_write('Multi-City Metrics', type='h5', color='gray')
 

@@ -745,7 +745,7 @@ class ECharts:
                     # 'color': '#F9713C' # this will make all the trials the same color
                 },
                 "areaStyle": {
-                    "opacity": 0.2
+                    "opacity": 0.05
                 }
             }
             ],

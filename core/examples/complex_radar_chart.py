@@ -1,7 +1,7 @@
 # core/examples/complex_radar_chart.py
 import streamlit as st
 from core.charts import ECharts
-
+from core.utils import custom_write
 
 def render():
     indicators = [
@@ -23,6 +23,8 @@ def render():
     ]
     palette = ["#2563eb", "#22c55e", "#eab308", "#ef4444"]
 
+    custom_write('Multi-City Metrics', type='h5', color='gray')
+
     ECharts.radar(
         indicators=indicators,
         data=data,
@@ -36,13 +38,13 @@ def render():
         legend={
             "data": series_names,
             "left": "center",
-            "top": 28,  # adjust if title is bigger
+            "top": 10,  # adjust if title is bigger
             "orient": "horizontal",
             "padding": 0,
             "itemGap": 10,
             "itemWidth": 10,
             "itemHeight": 10,
-            "textStyle": {"fontSize": 11}
+            "textStyle": {"fontSize": 14}
         },
 
         # 👇 Make axis labels smaller & nudge them closer to the edge

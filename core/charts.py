@@ -130,7 +130,7 @@ class GIS:
             # scatter options
             symbol_size: int = 8,
             # choropleth options
-            visual_map: bool = True,
+            visual_map: bool | dict = True,
             tooltip_title: Optional[str] = None,
             map_title: Optional[str] = 'Map of Ireland',
             cmap: Optional[Union[str, Sequence[str]]] = None,
@@ -166,7 +166,8 @@ class GIS:
         title_opts = {
             'text': map_title,
             'subtext': 'created by @Astrojigs (Jigar Patel)',
-            'left': 'right'
+            'left': 'center',  # 👈 center title
+            'top': 1  # 👈 optional: pull it a bit closer to the map
         }
 
         # ---- Options for Tooltip title
@@ -282,28 +283,42 @@ class GIS:
                 "roam": True,  # pan the entire choropleth
                 "label": label_opts,
                 "itemStyle": style,
+
                 "emphasis": {
                     "label": emphasis_label,
                     "itemStyle": emphasis_style
                 },
                 "data": data,
+                "left": "center",
+                "top": 100,  # space for the colorbar; tweak to taste
                 **series_opts,
             }],
         }
 
         if visual_map:
             vis = {
+                "type": "continuous",
                 "min": float(df[value_col].min()),
                 "max": float(df[value_col].max()),
-                "left": "right",
-                "top": "bottom",
+                "orient": "horizontal",
+                "left": "center",  # centered under the title
+                "top": 54,  # <= adjust gap below the title (px)
+
                 "text": ["High", "Low"],
+                "textGap": 6,
+                "itemWidth": 20,  # length of the bar
+                "itemHeight": 310,
                 "calculable": True,
-                "outOfRange": {'color': ['rgba(0,0,0,0)']},
+                "outOfRange": {"color": ["rgba(0,0,0,0)"]},
             }
             cmap_list = _resolve_cmap(cmap, cmap_steps)
             if cmap_list:
                 vis["inRange"] = {"color": cmap_list}
+
+            # allow per-call overrides
+            if isinstance(visual_map, dict):
+                vis.update(visual_map)
+
             opts["visualMap"] = vis
 
         # note: no 'geo' key here!

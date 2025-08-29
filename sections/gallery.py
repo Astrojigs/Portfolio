@@ -9,7 +9,7 @@ def render():
     # caption
     custom_write("Here are some examples of what I do", color='gray', type='caption')
 
-    c1, c2 = st.columns([1.5, 1])
+    c1, c2 = st.columns([1, 1.2])
 
     with c1:
         # GIS example

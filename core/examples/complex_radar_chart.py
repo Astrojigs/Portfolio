@@ -3,6 +3,7 @@ import streamlit as st
 from core.charts import ECharts
 from core.utils import custom_write
 
+
 def render():
     indicators = [
         {"name": "Rent Affordability", "max": 100},

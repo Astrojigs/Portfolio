@@ -91,9 +91,7 @@ def render():
                 "https://www.linkedin.com/in/astrojigs/",
             ]
             SocialMediaIcons(social_media_links).render()
-
             st.divider()
-
             # --- Save contact (vCard download) ---
             vcard = """BEGIN:VCARD
         VERSION:3.0
@@ -111,16 +109,6 @@ def render():
 
             st.caption("Prefer LinkedIn? Connect and mention you came via the website so I don’t miss it.")
 
-            st.divider()
-
-            # --- Small animated touch (subtle loop) ---
-            # Use a small, quiet GIF so it doesn't distract from the form.
-            # Replace with your own if you like.
-            gif_path = "./core/references/gifs/astrojigs_intro.gif"  # or another small GIF
-            try:
-                st.image(gif_path, use_container_width=True)
-            except Exception:
-                st.caption("P.S. Imagine a tasteful little GIF here ✨")
 
         with right:
             with st.form("contact_form", clear_on_submit=False):

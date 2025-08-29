@@ -46,10 +46,10 @@ def render():
         df,
         county_col="County",
         value_col="Distance_to_Dublin_centre_km",
-        cmap="inferno_r",
+        cmap="summer_r",
         cmap_steps=7,
         visual_map=True,
-        map_title="Ireland — Distance to Dublin (km)",
+        map_title="GIS Ireland — Distance to Dublin (km)",
         label_on_hover=True,
         label_size=10,
         height="600px",
@@ -59,4 +59,5 @@ def render():
             "animation": False,     # faster first paint
             "progressive": 0        # turn off progressive calc overhead
         },
+
     )

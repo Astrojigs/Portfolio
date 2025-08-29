@@ -4,6 +4,7 @@ from core import utils
 from core.charts import ECharts
 from sections import about_me
 
+
 def show_radar_skills():
     # --- Define Skills & Levels ---
     skills = [

@@ -78,9 +78,9 @@ def render():
                     st.markdown("### Jigar Patel")
                     st.markdown("Data Analyst · Python Developer")
                     st.caption(f"📍 Dublin · {now_dublin} (local)")
-                    # Internal resume link (keeps your existing route)
-                    st.page_link(st.session_state['pages']['my_cv'], label="📄 View Resume",
-                                 icon=":material/description:")
+                    # # Internal resume link (keeps your existing route)
+                    # st.page_link(st.session_state['pages']['my_cv'], label="📄 View Resume",
+                    #              icon=":material/description:")
 
             st.divider()
 

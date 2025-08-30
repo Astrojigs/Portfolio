@@ -36,7 +36,7 @@ def render():
         with custom_container(key='rl example', hover_lift_px=3, radius="20px", padding="10px"):
             rl_repo_link = "https://github.com/Astrojigs/LunarLander-Agent"
             custom_write("Reinforcement Learning - Lunar Lander", color='gray', type='h4')
-            st.page_link(rl_repo_link, label="🪄 :red[Link to Repo]", icon=":material/visibility:")
+            st.page_link(rl_repo_link, label="🪄 :red[Link to Repository]", icon=":material/cognition:")
             st.image("./core/references/gifs/reinforcement learning example.gif")
 
     # more example coming in

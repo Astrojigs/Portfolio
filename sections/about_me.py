@@ -185,17 +185,16 @@ def render():
         image_caption="Wind vectors over terrain with incident fires (Nov)"
     )
 
-
-    # with custom_container(key='P1', bg="#FAF3E0", accent="#FF8C00", elevation=2, hover_elevation=4) as c:
-    #     c.subheader("Clinical Trials Dashboard")
-    #     c.caption("Built with **Streamlit + AWS**, providing real-time insights into clinical trial data.")
-    #     chips(["Streamlit", {"label": "AWS", "variant": "info", "icon": "☁️"}, "ECharts"], size="sm", container=c)
-    #     c.button("🔍 View Project")
-    #
-    # with custom_container(key='P2', bg="#ffffff", elevation=2, hover_elevation=3, border="1px solid #eee") as c:
-    #     c.subheader("Finance Portfolio Optimizer")
-    #     c.caption("Efficient frontier & tangency tools in Python.")
-    #     chips(
-    #         ["Python", {"label": "Pandas", "variant": "line"}, {"label": "Portfolio", "variant": "warn", "icon": "💹"}],
-    #         size="lg", container=c)
-    #     c.button("📊 View Project")
+    # Lunar Lander Agent
+    project_card(
+        title="Reinforcement Learning (Lunar Lander) — Python + TensorFlow",
+        caption="Machine Learning • Artificial Intelligence • Algorithms • Policy • Agentic AI",
+        tags=['Python', "TensorFlow", "Deep Learning", "Reinforcement Learning", 'Agent', "AI"],
+        url = "https://github.com/Astrojigs/LunarLander-Agent/tree",
+        summary="A reinforcement learning agent trained on OpenAI Gym’s LunarLander-v2 that achieves "
+        "reliable landings after ~760 episodes. Includes saved .h5 models and training artifacts."
+                "*Unable to continue further training due to computational constraints*",
+        url_name="🌐 GitHub ↗",
+        image_url="./core/references/gifs/reinforcement learning example.gif",
+        image_caption="Lander able to land after ~760 epochs."
+    )

@@ -248,20 +248,28 @@ def render():
     # ————————————————————————————————————————————————————————————————
     # 6) Tuning & gotchas
     # ————————————————————————————————————————————————————————————————
-    custom_write("Tuning & gotchas", type="h2")
-    st.markdown(
-        "- **θ (opening angle)**: smaller → more accurate, slower. Try 0.5–0.8.\n"
-        "- **ε (softening)**: prevents singular forces; too small → noisy core, too large → overly fluffy.\n"
-        "- **capacity / max_depth**: guard against deep trees with overlapping points.\n"
-        "- **Energy behaviour**: leapfrog (KDK) keeps energy drift bounded compared to Euler.\n"
-        "- **Video export**: share H.264/yuv420p with `+faststart` (your `_web.mp4` files)."
-    )
 
-    custom_write("Source", type="h2")
-    st.markdown(
-        "- Full OOP implementation in my repo: "
-        "[Orbital-simulations/barnes_hut.py](https://github.com/Astrojigs/Orbital-simulations/b"
-        "lob/main/barnes_hut.py)\n"
-        "- This page documents the architecture and reproduces the notebook example."
-    )
+    c1, c2 = st.columns(2)
+    with c1:
+        custom_write("Tuning & gotchas", type="h2")
+        st.markdown(
+            "- **θ (opening angle)**: smaller → more accurate, slower. Try 0.5–0.8.\n"
+            "- **ε (softening)**: prevents singular forces; too small → noisy core, too large → overly fluffy.\n"
+            "- **capacity / max_depth**: guard against deep trees with overlapping points.\n"
+            "- **Energy behaviour**: leapfrog (KDK) keeps energy drift bounded compared to Euler.\n"
+            "- **Video export**: share H.264/yuv420p with `+faststart` (your `_web.mp4` files)."
+        )
+
+        custom_write("Source", type="h2")
+        st.markdown(
+            "- Full OOP implementation in my repo: "
+            "[Orbital-simulations/barnes_hut.py](https://github.com/Astrojigs/Orbital-simulations/b"
+            "lob/main/barnes_hut.py)\n"
+            "- This page documents the architecture and reproduces the notebook example."
+        )
+    with c2:
+        with custom_container(key="2nd Barnes Hut example"):
+            custom_write("Barnes-Hut Algorithm in action (Example 2)", color="gray", type="h5")
+            hero_video('./core/references/Project Files/Barnes-Hut/ep1_web.mp4',
+                       mp4_path="./core/references/Project Files/Barnes-Hut/ep1_web.mp4", max_width_px=400)
     # custom_write("<i>More details coming in soon</i>...", color='gray')

@@ -39,5 +39,15 @@ def render():
             st.page_link(rl_repo_link, label="🪄 :red[Link to Repository]", icon=":material/cognition:")
             st.image("./core/references/gifs/reinforcement learning example.gif")
 
+    with c2:
+        with custom_container(key="Barnes-Hut Example"):
+            sub_c1, sub_c2 = st.columns([1, 1])
+            with sub_c1:
+                hero_video("./core/references/Project Files/Barnes-Hut/ep2_web.mp4",
+                           mp4_path="./core/references/Project Files/Barnes-Hut/ep2_web.mp4")
+            with sub_c2:
+                hero_video('./core/references/Project Files/Barnes-Hut/ep2_quadtree_web.mp4',
+                           mp4_path="./core/references/Project Files/Barnes-Hut/ep2_quadtree_web.mp4")
+
     # more example coming in
     custom_write('More examples coming in...', type='h4', color='gray')

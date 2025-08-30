@@ -23,7 +23,7 @@ def main():
                            icon=':material/gallery_thumbnail:')
 
     # ---------- Project Pages --------------------
-    barnes_hut_page = st.Page(sections.projects.barnes_hut.render, title='Barnes-Hut',
+    barnes_hut_page = st.Page(sections.projects.barnes_hut.render, title='Barnes-Hut Algorithm',
                               icon=":material/developer_board:",
                               url_path="projects-barnes_hut")
     cycle_gan_page = st.Page(sections.projects.cycle_gan.render, title='Aerial Images to Maps (CycleGAN)',

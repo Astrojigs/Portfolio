@@ -39,15 +39,23 @@ def render():
             st.page_link(rl_repo_link, label="🪄 :red[Link to Repository]", icon=":material/cognition:")
             st.image("./core/references/gifs/reinforcement learning example.gif")
 
-    with c2:
-        with custom_container(key="Barnes-Hut Example"):
-            sub_c1, sub_c2 = st.columns([1, 1])
-            with sub_c1:
-                hero_video("./core/references/Project Files/Barnes-Hut/ep2_web.mp4",
-                           mp4_path="./core/references/Project Files/Barnes-Hut/ep2_web.mp4")
-            with sub_c2:
-                hero_video('./core/references/Project Files/Barnes-Hut/ep2_quadtree_web.mp4',
-                           mp4_path="./core/references/Project Files/Barnes-Hut/ep2_quadtree_web.mp4")
+    # with c2:
+    with custom_container(key="Barnes-Hut Example"):
+
+        st.write("### Barnes–Hut N-Body (2D)")
+        st.page_link(page=st.session_state['pages']['projects-barnes_hut'], label=":red[See more...] :material/link:",)
+        # st.page_link(page="https://github.com/Astrojigs/Orbital-simulations/"
+        #                   "blob/main/Barnes-hut%20Algorithm%20Animations.ipynb", label=":blue[Github Notebook] :material/link:")
+        sub_c1, sub_c2 = st.columns([1, 1])
+        with sub_c1:
+            custom_write("<b>Example 1</b> (<i>without Quadtree</i>)")
+            hero_video("./core/references/Project Files/Barnes-Hut/ep1_web.mp4",
+                       mp4_path="./core/references/Project Files/Barnes-Hut/ep1_web.mp4")
+        with sub_c2:
+
+            custom_write("<b>Example 2</b> (<i>with Quadtree</i>)")
+            hero_video('./core/references/Project Files/Barnes-Hut/ep2_quadtree_web.mp4',
+                       mp4_path="./core/references/Project Files/Barnes-Hut/ep2_quadtree_web.mp4")
 
     # more example coming in
     custom_write('More examples coming in...', type='h4', color='gray')

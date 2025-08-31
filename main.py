@@ -9,10 +9,9 @@ def config(page_title='Astrojigs Portfolio'):
     """
     st.set_page_config(layout='wide', page_title=page_title,
                        page_icon='./core/references/images/ProfilePic.jpeg')
-    
+
 
 def main():
-    hide_streamlit_branding()
     config()
 
     st.logo("./core/references/images/astrojigs logo.png")

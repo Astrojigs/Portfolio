@@ -8,27 +8,6 @@ import streamlit as st
 import re
 
 
-def hide_streamlit_branding():
-    st.markdown("""
-        <style>
-            /* top-right toolbar */
-            [data-testid="stToolbar"] { display: none !important; }
-
-            /* old footer element (some themes/versions) */
-            footer { visibility: hidden; display: none !important; }
-
-            /* bottom-right "Made with Streamlit" badge in embeds */
-            .viewerBadge_link__ { display: none !important; }
-            .viewerBadge_container__ { display: none !important; }
-
-            /* the fullscreen button that appears in embeds */
-            button[title="View fullscreen"] { display: none !important; }
-
-            /* decorative colored line / deploy button overlays (defensive) */
-            [data-testid="stDecoration"], .stDeployButton { display: none !important; }
-        </style>
-    """, unsafe_allow_html=True)
-
 
 def _sanitize_key(key: str) -> str:
     # valid CSS id chars only

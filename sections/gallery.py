@@ -49,13 +49,13 @@ def render():
         sub_c1, sub_c2 = st.columns([1, 1])
         with sub_c1:
             custom_write("<b>Example 1</b> (<i>without Quadtree</i>)")
-            hero_video("./core/references/Project Files/Barnes-Hut/ep9600_web.mp4",
-                       mp4_path="./core/references/Project Files/Barnes-Hut/ep9600_web.mp4")
+            hero_video("./core/references/Project Files/Barnes-Hut/compressed/ep9600_compressed.mp4",
+                       mp4_path="./core/references/Project Files/Barnes-Hut/compressed/ep9600_compressed.mp4")
         with sub_c2:
 
             custom_write("<b>Example 2</b> (<i>with Quadtree</i>)")
-            hero_video('./core/references/Project Files/Barnes-Hut/ep2_quadtree_web.mp4',
-                       mp4_path="./core/references/Project Files/Barnes-Hut/ep2_quadtree_web.mp4")
+            hero_video('./core/references/Project Files/Barnes-Hut/compressed/ep2_quadtree_compressed.mp4',
+                       mp4_path="./core/references/Project Files/Barnes-Hut/compressed/ep2_quadtree_compressed.mp4")
 
     # more example coming in
     custom_write('More examples coming in...', type='h4', color='gray')

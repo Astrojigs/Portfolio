@@ -242,8 +242,8 @@ def render():
             hero_video("./core/references/Project Files/Barnes-Hut/ep2_web.mp4",
                        mp4_path="./core/references/Project Files/Barnes-Hut/ep2_web.mp4")
         with c2:
-            hero_video('./core/references/Project Files/Barnes-Hut/ep2_quadtree_web.mp4',
-                       mp4_path="./core/references/Project Files/Barnes-Hut/ep2_quadtree_web.mp4")
+            hero_video('./core/references/Project Files/Barnes-Hut/compressed/ep2_quadtree_compressed.mp4',
+                       mp4_path="./core/references/Project Files/Barnes-Hut/compressed/ep2_quadtree_compressed.mp4")
 
     # ————————————————————————————————————————————————————————————————
     # 6) Tuning & gotchas
@@ -270,6 +270,7 @@ def render():
     with c2:
         with custom_container(key="2nd Barnes Hut example"):
             custom_write("Barnes-Hut Algorithm in action (Example 2)", color="gray", type="h5")
-            hero_video('./core/references/Project Files/Barnes-Hut/ep1_web.mp4',
-                       mp4_path="./core/references/Project Files/Barnes-Hut/ep1_web.mp4", max_width_px=400)
+            hero_video('./core/references/Project Files/Barnes-Hut/compressed/ep9600_compressed.mp4',
+                       mp4_path="./core/references/Project Files/Barnes-Hut/compressed/ep9600_compressed.mp4",
+                       max_width_px=400)
     # custom_write("<i>More details coming in soon</i>...", color='gray')

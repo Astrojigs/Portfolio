@@ -1,7 +1,5 @@
 import streamlit as st
 import sections
-from core.utils import hide_streamlit_branding
-
 
 def config(page_title='Astrojigs Portfolio'):
     """

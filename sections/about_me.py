@@ -41,24 +41,18 @@ def show_radar_skills():
 
     )
 
+
 # -----------------------------
 # Page
 # -----------------------------
 def render():
-    # Title
-    # utils.custom_write("Jigar Patel's Portfolio", type='h1')
-    # utils.custom_write('Everything there is to know about me.', type='para')
-    # st.divider()
-
     # Header block (image + intro)
     col_img, col_text = st.columns([1, 2])
     with col_img:
         st.image("./core/references/images/ProfilePic no background.png", width=400)
 
     with col_text:
-        with custom_container(key='Intro') as c:
-            # utils.custom_write("Who Am I?", type='h2', color='black')
-
+        with custom_container(key='Intro'):
             # ✨ Intro (closed span, better spacing)
             utils.custom_write("""
             <span style="font-size:16px; line-height:1.8;">
@@ -190,9 +184,9 @@ def render():
         title="Reinforcement Learning (Lunar Lander) — Python + TensorFlow",
         caption="Machine Learning • Artificial Intelligence • Algorithms • Policy • Agentic AI",
         tags=['Python', "TensorFlow", "Deep Learning", "Reinforcement Learning", 'Agent', "AI"],
-        url = "https://github.com/Astrojigs/LunarLander-Agent/tree",
+        url="https://github.com/Astrojigs/LunarLander-Agent/tree",
         summary="A reinforcement learning agent trained on OpenAI Gym’s LunarLander-v2 that achieves "
-        "reliable landings after ~760 episodes. Includes saved .h5 models and training artifacts."
+                "reliable landings after ~760 episodes. Includes saved .h5 models and training artifacts."
                 "*Unable to continue further training due to computational constraints*",
         url_name="🌐 GitHub ↗",
         image_url="./core/references/gifs/reinforcement learning example.gif",

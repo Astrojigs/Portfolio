@@ -8,6 +8,8 @@ import requests
 from PIL import Image
 import streamlit as st
 
+from core.utils import custom_write
+
 
 @lru_cache(maxsize=32)
 def load_image_from_url(url: str) -> Image.Image:
@@ -62,7 +64,8 @@ def introduction_section() -> None:
     )
     st.page_link(page="https://www.kaggle.com/datasets/suyashdamle/cyclegan", label=":blue[Link to Dataset]",
                  icon=":material/link:")
-
+    st.page_link(page="https://github.com/Astrojigs/Aerial-images-to-maps", label=":orange[GitHub Repository]",
+                 icon=":material/link:")
 
 def dataset_section(aerial_url: str, map_url: str) -> None:
     """Render the dataset section with example images.
@@ -91,8 +94,8 @@ def dataset_section(aerial_url: str, map_url: str) -> None:
     st.info(
         """
         The images above come from the [CycleGAN dataset on Kaggle](https://www.kaggle.com/datasets/suyashdamle/cyclegan),
-        which provides unpaired collections of aerial and map images:contentReference[oaicite:6]{index=6}.
-        Models were trained on images resized to **128×128** and **256×256** pixels:contentReference[oaicite:7]{index=7}.
+        which provides unpaired collections of aerial and map images.
+        Models were trained on images resized to **128×128** and **256×256** pixels.
         """
     )
 
@@ -151,13 +154,14 @@ def losses_section() -> None:
     st.write(
         """
         In our implementation we use the binary cross entropy variant of
-        these losses as described in the TensorFlow CycleGAN tutorial:contentReference[oaicite:8]{index=8}.
+        these losses as described in the TensorFlow CycleGAN tutorial.
 
         Because training pairs are not available, we include a
         **cycle‑consistency loss** that forces the composition of the two
         generators to reconstruct the original image.  Forward and
         backward cycle consistency losses are computed as the mean
-        absolute error between the input image and its reconstruction:contentReference[oaicite:9]{index=9}:
+        backward cycle consistency losses are computed as the mean
+        absolute error between the input image and its reconstruction:
         """
     )
     st.latex(
@@ -170,7 +174,7 @@ def losses_section() -> None:
         images that already belong to the target domain.  If we pass a map
         image through the aerial‑to‑map generator \\(G\\) or an aerial image
         through the inverse generator \\(F\\) the outputs should remain
-        unchanged:contentReference[oaicite:10]{index=10}:
+        unchanged:
         """
     )
     st.latex(
@@ -276,7 +280,7 @@ def conclusion_section() -> None:
 
 def render() -> None:
     """Main entry point for the Streamlit application."""
-    st.title("Aerial Images to Maps using CycleGAN")
+    custom_write("Aerial Images to Maps using CycleGAN", type="h1")
 
     # Define image URLs used in the app
     base_url = "https://raw.githubusercontent.com/Astrojigs/Aerial-images-to-maps/main/Images"

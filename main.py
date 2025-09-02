@@ -1,6 +1,7 @@
 import streamlit as st
 import sections
 
+
 def config(page_title='Astrojigs Portfolio'):
     """
     configure main page title
@@ -11,7 +12,6 @@ def config(page_title='Astrojigs Portfolio'):
 
 def main():
     config()
-
     st.logo("./core/references/images/astrojigs logo.png")
 
     # ------------------- Pages ---------------------------

@@ -143,7 +143,8 @@ def render():
         custom_write("Quadtree", type="h3")
         st.markdown(
             "- **State**: `boundary`, `mass`, `comx`, `comy`, `children[4]`, `points`, `divided`.\n"
-            "- **Invariant**: every node stores the **total mass** and **COM** of its subtree (updated **incrementally** during `insert`).\n"
+            "- **Invariant**: every node stores the **total mass** and **COM** of its subtree (updated "
+            "**incrementally** during `insert`).\n"
             "- **Public API**:\n"
             "  - `insert(p)`: route point → maybe subdivide → push down; update mass/COM on the way.\n"
             "  - `calculate_force(p)`: leaf = exact sum; internal = opening test → either monopole or recurse.\n"

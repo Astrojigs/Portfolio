@@ -67,6 +67,7 @@ def introduction_section() -> None:
     st.page_link(page="https://github.com/Astrojigs/Aerial-images-to-maps", label=":orange[GitHub Repository]",
                  icon=":material/link:")
 
+
 def dataset_section(aerial_url: str, map_url: str) -> None:
     """Render the dataset section with example images.
 

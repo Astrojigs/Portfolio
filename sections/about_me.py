@@ -42,7 +42,7 @@ def tech_stack():
     <div class="ti-wrap">
       <!-- Python -->
       <div class="ti-pill">
-        <img alt="Python" src="https://cdn.simpleicons.org/python/3776AB"/>
+        <img alt="Python" src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg"/>
         <span class="ti-label">Python</span>
       </div>
 
@@ -146,6 +146,7 @@ def tech_stack():
         <span class="ti-label">AWS</span>
       </div>
     </div>
+    <br>
     """, unsafe_allow_html=True)
 
 

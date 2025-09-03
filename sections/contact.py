@@ -89,6 +89,7 @@ def render():
             social_media_links = [
                 "https://www.github.com/astrojigs",
                 "https://www.linkedin.com/in/astrojigs/",
+                "https://buymeacoffee.com/astrojigs2a"
             ]
             SocialMediaIcons(social_media_links).render()
             st.divider()
@@ -108,7 +109,6 @@ def render():
             st.download_button("💾 Save contact (vCard)", vcard, file_name="Jigar_Patel.vcf", mime="text/vcard")
 
             st.caption("Prefer LinkedIn? Connect and mention you came via the website so I don’t miss it.")
-
 
         with right:
             with st.form("contact_form", clear_on_submit=False):

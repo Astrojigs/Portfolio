@@ -10,6 +10,134 @@ from core.charts import ECharts
 # -----------------------------
 # Charts
 # -----------------------------
+
+
+def tech_stack():
+    custom_write("My Tech Stack", type="h3", color="gray")
+
+    st.markdown("""
+    <!-- Devicon font (kept for Matplotlib) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"/>
+
+    <style>
+      .ti-wrap{
+        --gap:.75rem; --icon-size:28px;
+        display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
+        gap:var(--gap); margin-top:.5rem;
+      }
+      .ti-pill{
+        display:flex; align-items:center; gap:.6rem;
+        padding:.6rem .8rem; border-radius:999px;
+        border:1px solid rgba(0,0,0,.08);
+        background:rgba(0,0,0,.03);
+      }
+      [data-theme="dark"] .ti-pill{
+        border-color:rgba(255,255,255,.10);
+        background:rgba(255,255,255,.05);
+      }
+      .ti-pill img{ width:var(--icon-size); height:var(--icon-size); display:block; }
+      .ti-icon{ font-size:var(--icon-size); line-height:1; }
+      .ti-label{ font-size:.95rem; opacity:.95; }
+    </style>
+
+    <div class="ti-wrap">
+      <!-- Python -->
+      <div class="ti-pill">
+        <img alt="Python" src="https://cdn.simpleicons.org/python/3776AB"/>
+        <span class="ti-label">Python</span>
+      </div>
+
+      <!-- Streamlit -->
+      <div class="ti-pill">
+        <img alt="Streamlit" src="https://cdn.simpleicons.org/streamlit/FF4B4B"/>
+        <span class="ti-label">Streamlit</span>
+      </div>
+
+      <!-- NumPy -->
+      <div class="ti-pill">
+        <img alt="NumPy" src="https://cdn.simpleicons.org/numpy/013243"/>
+        <span class="ti-label">NumPy</span>
+      </div>
+
+      <!-- Pandas -->
+      <div class="ti-pill">
+        <img alt="Pandas" src="https://cdn.simpleicons.org/pandas/150458"/>
+        <span class="ti-label">Pandas</span>
+      </div>
+
+      <!-- ECharts -->
+      <div class="ti-pill">
+        <img alt="ECharts" src="https://cdn.simpleicons.org/apacheecharts/AA344D"/>
+        <span class="ti-label">ECharts</span>
+      </div>
+
+      <!-- QGIS (Simple Icons with Wikimedia fallback) -->
+      <div class="ti-pill">
+        <img alt="QGIS"
+             src="https://cdn.simpleicons.org/qgis/589632"
+             onerror="this.onerror=null;this.src='https://commons.wikimedia.org/wiki/Special:FilePath/QGIS_logo%2C_2017.svg';"/>
+        <span class="ti-label">QGIS</span>
+      </div>
+
+      <!-- GeoPandas (official docs with GitHub fallback) -->
+      <div class="ti-pill">
+        <img alt="GeoPandas"
+             src="https://geopandas.org/en/stable/_static/logo/geopandas_icon.png"
+             onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/geopandas/geopandas/main/doc/source/_static/logo/geopandas_icon.png';"/>
+        <span class="ti-label">GeoPandas</span>
+      </div>
+
+      <!-- OpenCV -->
+      <div class="ti-pill">
+        <img alt="OpenCV" src="https://cdn.simpleicons.org/opencv/5C3EE8"/>
+        <span class="ti-label">OpenCV</span>
+      </div>
+
+      <!-- TensorFlow -->
+      <div class="ti-pill">
+        <img alt="TensorFlow" src="https://cdn.simpleicons.org/tensorflow/FF6F00"/>
+        <span class="ti-label">TensorFlow</span>
+      </div>
+
+      <!-- PyTorch -->
+      <div class="ti-pill">
+        <img alt="PyTorch" src="https://cdn.simpleicons.org/pytorch/EE4C2C"/>
+        <span class="ti-label">PyTorch</span>
+      </div>
+
+      <!-- Git -->
+      <div class="ti-pill">
+        <img alt="Git" src="https://cdn.simpleicons.org/git/F05032"/>
+        <span class="ti-label">Git</span>
+      </div>
+
+      <!-- Docker -->
+      <div class="ti-pill">
+        <img alt="Docker" src="https://cdn.simpleicons.org/docker/2496ED"/>
+        <span class="ti-label">Docker</span>
+      </div>
+
+      <!-- Linux -->
+      <div class="ti-pill">
+        <img alt="Linux" src="https://cdn.simpleicons.org/linux/FCC624"/>
+        <span class="ti-label">Linux</span>
+      </div>
+
+      <!-- Matplotlib (Devicon font) -->
+      <div class="ti-pill">
+        <i class="devicon-matplotlib-plain colored ti-icon" aria-label="Matplotlib"></i>
+        <span class="ti-label">Matplotlib</span>
+      </div>
+
+      <!-- AWS (image with auto-fallback) -->
+      <div class="ti-pill">
+        <img alt="AWS"
+             src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
+             onerror="this.onerror=null;this.src='https://icongr.am/devicon/amazonwebservices-original.svg?size=64&color=FF9900';"/>
+        <span class="ti-label">AWS</span>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
 def show_radar_skills():
     skills = [
         {"name": "Python", "max": 100},
@@ -83,7 +211,8 @@ def render():
     utils.custom_write('Technical Skills', type='h2', color='gray', align='center')
     skill_description_col, radar_col = st.columns(2)
     with skill_description_col:
-        # with custom_container(key="Skill Description"):
+        # Tech stack icons
+        tech_stack()
         st.markdown("""
         **I build end-to-end data apps**—from ingestion and cleaning to modelling and interactive dashboards.
         

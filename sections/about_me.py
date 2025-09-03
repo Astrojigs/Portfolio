@@ -11,12 +11,11 @@ from core.charts import ECharts
 # Charts
 # -----------------------------
 
-
 def tech_stack():
     custom_write("My Tech Stack", type="h3", color="gray")
 
     st.markdown("""
-    <!-- Devicon font (kept for Matplotlib) -->
+    <!-- Devicon font (for Matplotlib icon) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"/>
 
     <style>
@@ -71,7 +70,7 @@ def tech_stack():
         <span class="ti-label">ECharts</span>
       </div>
 
-      <!-- QGIS (Simple Icons with Wikimedia fallback) -->
+      <!-- QGIS -->
       <div class="ti-pill">
         <img alt="QGIS"
              src="https://cdn.simpleicons.org/qgis/589632"
@@ -79,7 +78,7 @@ def tech_stack():
         <span class="ti-label">QGIS</span>
       </div>
 
-      <!-- GeoPandas (official docs with GitHub fallback) -->
+      <!-- GeoPandas -->
       <div class="ti-pill">
         <img alt="GeoPandas"
              src="https://geopandas.org/en/stable/_static/logo/geopandas_icon.png"
@@ -117,10 +116,20 @@ def tech_stack():
         <span class="ti-label">Docker</span>
       </div>
 
-      <!-- Linux -->
+      <!-- PostgreSQL -->
       <div class="ti-pill">
-        <img alt="Linux" src="https://cdn.simpleicons.org/linux/FCC624"/>
-        <span class="ti-label">Linux</span>
+        <img alt="PostgreSQL"
+             src="https://cdn.simpleicons.org/postgresql/4169E1"
+             onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg';"/>
+        <span class="ti-label">PostgreSQL</span>
+      </div>
+
+      <!-- MySQL -->
+      <div class="ti-pill">
+        <img alt="MySQL"
+             src="https://cdn.simpleicons.org/mysql/4479A1"
+             onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg';"/>
+        <span class="ti-label">MySQL</span>
       </div>
 
       <!-- Matplotlib (Devicon font) -->
@@ -138,6 +147,8 @@ def tech_stack():
       </div>
     </div>
     """, unsafe_allow_html=True)
+
+
 def show_radar_skills():
     skills = [
         {"name": "Python", "max": 100},
